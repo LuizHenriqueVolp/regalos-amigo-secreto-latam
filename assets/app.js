@@ -109,15 +109,26 @@
       document.querySelectorAll(".count").forEach(animateCount);
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add("in");
-        en.target.querySelectorAll(".count").forEach(animateCount);
-        io.unobserve(en.target);
+    // Revela todo lo que ya está en pantalla o quedó arriba (scroll rápido / ancla)
+    var pending = Array.prototype.slice.call(els), ticking = false;
+    function check() {
+      ticking = false;
+      var limit = window.innerHeight * 0.94;
+      pending = pending.filter(function (e) {
+        if (e.getBoundingClientRect().top < limit) {
+          e.classList.add("in");
+          e.querySelectorAll(".count").forEach(animateCount);
+          return false;
+        }
+        return true;
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    els.forEach(function (e) { io.observe(e); });
+      if (!pending.length) { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); }
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    check();
+    setTimeout(check, 400);
   }
 
   /* ---------- ViewContent al ver el precio + sticky ---------- */
@@ -139,7 +150,7 @@
         priceVisible = en[0].isIntersecting;
         if (priceVisible && !seen) {
           seen = true;
-          fbq("track", "ViewContent", { content_name: "+60 Regalos Caseros", value: 9, currency: "USD" });
+          fbq("track", "ViewContent", { content_name: "+60 Regalos Caseros", value: 7, currency: "USD" });
           send({ type: "click", visit_id: visitId(), cta: "view_price", utm_campaign: params.utm_campaign, src: params.src }, true);
         }
         update();
@@ -204,12 +215,12 @@
   /* ---------- Gracias ---------- */
   function setupThanks() {
     if (PAGE !== "gracias") return;
-    fbq("trackCustom", "UpsellView", { content_name: "Kit de Canastas para Vender", value: 15, currency: "USD" });
+    fbq("trackCustom", "UpsellView", { content_name: "Kit de Canastas para Vender", value: 14, currency: "USD" });
     if (CFG.FIRE_PURCHASE_ON_THANKS) {
       var k = "lym_purchase_fired";
       try {
         if (!localStorage.getItem(k)) {
-          fbq("track", "Purchase", { value: CFG.PURCHASE_VALUE || 9, currency: CFG.CURRENCY || "USD" });
+          fbq("track", "Purchase", { value: CFG.PURCHASE_VALUE || 7, currency: CFG.CURRENCY || "USD" });
           localStorage.setItem(k, "1");
         }
       } catch (e) {}
@@ -224,12 +235,25 @@
     });
   }
 
+  /* ---------- Marquee: duplica los ítems para un loop continuo ---------- */
+  function setupMarquee() {
+    document.querySelectorAll(".marquee-track").forEach(function (t) {
+      Array.prototype.slice.call(t.children).forEach(function (el) {
+        var c = el.cloneNode(true);
+        c.classList.add("clone"); c.setAttribute("aria-hidden", "true");
+        c.querySelectorAll("img").forEach(function (i) { i.alt = ""; });
+        t.appendChild(c);
+      });
+    });
+  }
+
   /* ---------- Init ---------- */
+  setupMarquee();
   logVisit();
   if (PAGE === "gracias") {
-    bindCtas(".js-upsell", "UPSELL_URL", { value: 15, currency: "USD", content_name: "upsell_kit_canastas" });
+    bindCtas(".js-upsell", "UPSELL_URL", { value: 14, currency: "USD", content_name: "upsell_kit_canastas" });
   } else {
-    bindCtas(".js-cta", "CHECKOUT_URL", { value: 9, currency: "USD" });
+    bindCtas(".js-cta", "CHECKOUT_URL", { value: 7, currency: "USD" });
   }
   setupReveal();
   setupPriceAndSticky();
@@ -238,6 +262,6 @@
   setupThanks();
   // Pixel: clicks en upsell también disparan evento propio
   document.querySelectorAll(".js-upsell").forEach(function (a) {
-    a.addEventListener("click", function () { fbq("trackCustom", "UpsellClick", { value: 15, currency: "USD" }); });
+    a.addEventListener("click", function () { fbq("trackCustom", "UpsellClick", { value: 14, currency: "USD" }); });
   });
 })();

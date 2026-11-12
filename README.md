@@ -1,9 +1,10 @@
 # Lazo y Mano — +60 Regalos Caseros para Amigo Secreto
 
-Página de ventas mobile-first (LATAM, español neutro) para el infoproducto digital de US$ 9.
+Página de ventas mobile-first (LATAM, español neutro) para el infoproducto digital de US$ 7.
 
 - `/` → página de ventas
-- `/gracias` → página de agradecimiento con oferta única (upsell US$ 15)
+- `/gracias` → página de agradecimiento con oferta única (upsell US$ 14)
+- `/aviso-legal`, `/privacidad` → páginas legales
 - `/api/event` → función serverless que guarda visitas, clics y leads en Neon (Postgres)
 
 Stack: HTML + CSS + JS puro (sin build), imágenes WebP con lazy load, video MP4 cargado solo al tocar play. Deploy en Vercel vía GitHub.
@@ -16,7 +17,8 @@ gracias.html          página de gracias + upsell
 assets/config.js      ← LINKS DE CHECKOUT, UPSELL Y PIXEL (editar aquí)
 assets/styles.css     estilos; colores y fuentes en variables CSS al inicio (:root)
 assets/app.js         tracking (Meta Pixel + Neon), carrusel, animaciones, sticky CTA
-assets/img/           logo y portadas del material
+assets/img/           logo, portadas y mockups del producto y bonos
+assets/regalos/       fotos de ejemplos (Unsplash) para la franja que pasa sin parar
 assets/muestras/      páginas REALES del material (carrusel "Mira por dentro")
 assets-ia/            imágenes generadas por IA (siempre con "Imagen ilustrativa")
 assets/video/         video ilustrativo comprimido + póster
@@ -24,17 +26,28 @@ api/event.js          función serverless → Neon
 sql/schema.sql        tablas visits, clicks, leads
 ```
 
-## Pendientes [PREENCHER]
+## Oferta actual
 
-| Dónde | Qué |
-|---|---|
-| `assets/config.js` → `CHECKOUT_URL` | Link del checkout Cakto (US$ 9) |
-| `assets/config.js` → `UPSELL_URL` | Link del upsell Kit de Canastas (US$ 15) |
-| `index.html` / `gracias.html` | Días de garantía (buscar `[PREENCHER]`), cómo pedir reembolso, medios de pago, contacto, aviso legal, privacidad |
-| `index.html` carrusel | Fotos REALES de canastas armadas (no usar IA) |
-| `index.html` prueba social | Solo testimonios reales. Hoy la sección está omitida |
+| Producto | Precio | Checkout Cakto |
+|---|---|---|
+| +60 Regalos Caseros + 3 bonos (Empieza aquí, Etiquetas, Guía de canastas) | de US$ 9 por **US$ 7** | https://pay.cakto.com.br/372iq4v_1313944 |
+| Order bump: Dinámicas de Amigo Secreto | US$ 5 (dentro del checkout) | https://pay.cakto.com.br/rvfj6tj_1313965 |
+| Upsell en /gracias: Kit de Canastas para Vender | de US$ 15 por **US$ 14** | https://pay.cakto.com.br/vuusuyd_1313973 |
 
-Busca todo lo pendiente con: `grep -rn "PREENCHER" --include=*.html --include=*.js .`
+Garantía: 7 días. Contacto: WhatsApp +55 (45) 99818-2802.
+
+## Pendientes
+
+- Fotos reales de canastas armadas por compradores (agregar en "Mira por dentro").
+- Testimonios: solo reales. Hoy la sección está omitida.
+
+Busca pendientes con: `grep -rn "PREENCHER" --include=*.html --include=*.js .`
+
+## Créditos de imágenes
+
+- `assets/regalos/*` — fotos de [Unsplash](https://unsplash.com/license) (licencia gratuita, uso comercial permitido). IDs: 1614961752345-831dff127f96, 1600857544200-b2f666a9a2ec, 1642511842792-993e9b8cd0f8, 1665473052568-e36bc84cca4c, 1550623685-2227f7bbef18, 1702648906616-b030f193edb9, 1668723968333-28fff638eecd, 1757450317518-9d385619f5ee, 1690583368332-c1931e70e53e, 1485955900006-10f4d324d411, 1668432321756-5109ad1f5916.
+- `assets-ia/*` — generadas por IA, siempre con "Imagen ilustrativa".
+- `assets/muestras/*` — páginas reales del material. `assets/img/mockup-*.webp` — montados con las portadas reales.
 
 ## Deploy en Vercel (paso a paso)
 
@@ -62,10 +75,10 @@ Sin `vercel dev` puedes ver solo el front con cualquier servidor estático (`npx
 
 ## Cakto
 
-- **Checkout**: pega el link en `CHECKOUT_URL`. Todos los CTAs lo usan y reenvían `utm_source, utm_medium, utm_campaign, utm_content, utm_term, src, sck, fbclid` de la URL de la página.
-- **Order bump** "Dinámicas de Amigo Secreto" US$ 5: se configura en la Cakto (la página solo lo avisa).
+- **Checkout**: ya configurado en `CHECKOUT_URL`. Todos los CTAs lo usan y reenvían `utm_source, utm_medium, utm_campaign, utm_content, utm_term, src, sck, fbclid` de la URL de la página.
+- **Order bump** "Dinámicas de Amigo Secreto" US$ 5: debe estar asociado como order bump al producto principal en la Cakto (la página solo lo avisa).
 - **Página de obrigado**: en la Cakto, configura la URL de redirección después del pago a `https://TU-DOMINIO/gracias`.
-- **Upsell**: crea la oferta de US$ 15 en la Cakto y pega el link en `UPSELL_URL`.
+- **Upsell** US$ 14: ya configurado en `UPSELL_URL`.
 - **Purchase**: lo ideal es activar la integración nativa de Meta Pixel en la Cakto (ID `1882099482975493`), que dispara Purchase con el valor real. Si la Cakto no lo permite, cambia `FIRE_PURCHASE_ON_THANKS` a `true` en `config.js` (dispara una sola vez por navegador en `/gracias`). No actives los dos o contarás doble.
 
 ## Eventos de tracking
@@ -73,8 +86,8 @@ Sin `vercel dev` puedes ver solo el front con cualquier servidor estático (`npx
 | Evento | Pixel | Neon |
 |---|---|---|
 | Carga de la página | `PageView` | fila en `visits` (UTMs, src, país vía `x-vercel-ip-country`, dispositivo, referrer) |
-| Precio visible | `ViewContent` (US$ 9) | `clicks.cta = 'view_price'` |
-| Clic en cada CTA | `InitiateCheckout` (`content_name` = hero / incluye / precio / faq / sticky) | `clicks.cta` = nombre del botón |
+| Precio visible | `ViewContent` (US$ 7) | `clicks.cta = 'view_price'` |
+| Clic en cada CTA | `InitiateCheckout` (`content_name` = hero / ejemplos / bonos / precio / faq / sticky) | `clicks.cta` = nombre del botón |
 | Play en video | `VideoPlay` (custom) | `clicks.cta = 'video_play'` |
 | Visita a /gracias | `PageView` + `UpsellView` (custom) | `visits` |
 | Clic en upsell | `InitiateCheckout` + `UpsellClick` | `clicks.cta = 'upsell_si'` / `'upsell_no'` |
@@ -82,11 +95,11 @@ Sin `vercel dev` puedes ver solo el front con cualquier servidor estático (`npx
 
 ## Cambiar identidad visual
 
-Todo está en `:root` al inicio de `assets/styles.css` (`--vino`, `--dorado`, `--crema`, `--verde`, `--cacao`, `--font-title`, `--font-body`). Los valores actuales vienen del Manual de Marca Lazo y Mano (Fraunces + Nunito).
+Todo está en `:root` al inicio de `assets/styles.css` (`--vino`, `--dorado`, `--crema`, `--verde`, `--cacao`, `--font-title`, `--font-body`). Estilo actual: fondo blanco, títulos Montserrat y texto Nunito, colores navideños + vino de la marca.
 
 ## Reglas de contenido (checklist)
 
-- Números iguales en todas las secciones: +60 ideas (20/20/20), 12 canastas, US$ 9 / US$ 5 / US$ 15.
+- Números iguales en todas las secciones: +60 ideas (20/20/20), 12 canastas, US$ 7 / US$ 5 / US$ 14.
 - Imágenes de IA solo como ilustrativas y con la leyenda "Imagen ilustrativa"; nunca en el carrusel de muestras.
 - Sin testimonios, cronómetros, cupos ni números inventados. Sin mención a alcohol.
 - Ninguna credencial en el repositorio (`.env` está en `.gitignore`).
