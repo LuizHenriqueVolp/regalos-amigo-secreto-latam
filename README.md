@@ -1,5 +1,7 @@
 # Lazo y Mano — +60 Regalos Caseros para Amigo Secreto
 
+**En producción:** https://regalos-amigo-secreto-latam.vercel.app (proyecto Vercel `regalos-amigo-secreto-latam`, base Neon `regalos-amigo-secreto-latam`). Cada push a `main` publica automáticamente.
+
 Página de ventas mobile-first (LATAM, español neutro) para el infoproducto digital de US$ 7.
 
 - `/` → página de ventas
