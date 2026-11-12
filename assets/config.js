@@ -16,6 +16,12 @@ window.LYM_CONFIG = {
   // Pixel de Meta
   META_PIXEL_ID: "1882099482975493",
 
+  // Quién envía ViewContent / InitiateCheckout a Meta:
+  //  "utmify" -> solo el Pixel de Utmify (evita eventos duplicados). Este sitio
+  //              sigue enviando PageView y eventos propios (VideoPlay, Upsell*).
+  //  "site"    -> los envía este sitio (usar si quitas el Pixel de Meta del panel de Utmify).
+  META_STANDARD_EVENTS_BY: "utmify",
+
   // Dispara Purchase en /gracias. Déjalo en false si la integración nativa
   // de Pixel de la Cakto ya envía Purchase (evita contar dos veces).
   FIRE_PURCHASE_ON_THANKS: false,

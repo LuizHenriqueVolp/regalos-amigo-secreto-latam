@@ -85,7 +85,9 @@ Sin `vercel dev` puedes ver solo el front con cualquier servidor estático (`npx
 
 ## Pixel Utmify
 
-Instalado en `index.html` (`<head>`): define `pixelId = 6af5c2d57b52ae267eff15a5` y carga `https://cdn.utmify.com.br/scripts/pixel/pixel.js`. Envía eventos y lead a `tracking.utmify.com.br`. No duplica el PageView de Meta.
+Instalado en `index.html` y `gracias.html` (`<head>`): define `pixelId = 6af5c2d57b52ae267eff15a5` y carga `https://cdn.utmify.com.br/scripts/pixel/pixel.js`.
+
+**Importante:** el Pixel de Utmify también envía eventos estándar a Meta (`fbq`) con el pixel configurado en su panel: ViewContent (a los 8 s o al hacer scroll) e InitiateCheckout (al tocar un link de checkout). Para no duplicar, `META_STANDARD_EVENTS_BY: "utmify"` en `assets/config.js` hace que este sitio **no** envíe ViewContent/InitiateCheckout (sigue enviando PageView, VideoPlay, UpsellView/UpsellClick y todo el registro en Neon). Si quitas el Pixel de Meta del panel de Utmify, cambia a `"site"`.
 
 ## Eventos de tracking
 

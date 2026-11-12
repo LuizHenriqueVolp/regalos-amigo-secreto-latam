@@ -63,6 +63,9 @@
 
   /* ---------- Meta Pixel ---------- */
   function fbq() { if (window.fbq) window.fbq.apply(null, arguments); }
+  // Eventos estándar que Utmify ya envía a Meta: no duplicar
+  var UTMIFY_SENDS = (CFG.META_STANDARD_EVENTS_BY || "utmify") === "utmify";
+  function fbqStd(ev, data) { if (!UTMIFY_SENDS) fbq("track", ev, data); }
 
   /* ---------- CTAs → checkout ---------- */
   function bindCtas(selector, urlKey, pixelData) {
@@ -71,7 +74,7 @@
       if (isConfigured(url)) a.href = withParams(url);
       a.addEventListener("click", function (ev) {
         var cta = a.getAttribute("data-cta") || "cta";
-        fbq("track", "InitiateCheckout", Object.assign({ content_name: cta }, pixelData));
+        fbqStd("InitiateCheckout", Object.assign({ content_name: cta }, pixelData));
         window.LYM_logClick(cta);
         if (!isConfigured(CFG[urlKey])) {
           // Link aún no configurado: lleva al bloque de precio
@@ -161,7 +164,7 @@
         if (r.bottom > 0 && r.top < window.innerHeight - r.height * 0.4) {
           seen = true;
           window.removeEventListener("scroll", checkPrice);
-          fbq("track", "ViewContent", { content_name: "+60 Regalos Caseros", value: 7, currency: "USD" });
+          fbqStd("ViewContent", { content_name: "+60 Regalos Caseros", value: 7, currency: "USD" });
           send({ type: "click", visit_id: visitId(), cta: "view_price", utm_campaign: params.utm_campaign, src: params.src }, true);
         }
       };
