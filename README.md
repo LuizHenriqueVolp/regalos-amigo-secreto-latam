@@ -83,6 +83,10 @@ Sin `vercel dev` puedes ver solo el front con cualquier servidor estático (`npx
 - **Upsell** US$ 14: ya configurado en `UPSELL_URL`.
 - **Purchase**: lo ideal es activar la integración nativa de Meta Pixel en la Cakto (ID `1882099482975493`), que dispara Purchase con el valor real. Si la Cakto no lo permite, cambia `FIRE_PURCHASE_ON_THANKS` a `true` en `config.js` (dispara una sola vez por navegador en `/gracias`). No actives los dos o contarás doble.
 
+## Pixel Utmify
+
+Instalado en `index.html` (`<head>`): define `pixelId = 6af5c2d57b52ae267eff15a5` y carga `https://cdn.utmify.com.br/scripts/pixel/pixel.js`. Envía eventos y lead a `tracking.utmify.com.br`. No duplica el PageView de Meta.
+
 ## Eventos de tracking
 
 | Evento | Pixel | Neon |
