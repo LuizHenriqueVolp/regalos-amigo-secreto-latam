@@ -49,7 +49,7 @@ Busca pendientes con: `grep -rn "PREENCHER" --include=*.html --include=*.js .`
 
 - `assets/regalos-v2/*` — fotos de [Unsplash](https://unsplash.com/license) (licencia gratuita, uso comercial). Cada foto corresponde a una ficha real del ebook: 01 vela de soya, 25 jabones de avena y miel, 46 galletas con glasé, 21 mermelada de frutilla, 04 sales de baño, 06 chocolate caliente en frasco, 10 granola, 12 trufas de galleta, 22 bombas de baño, 15 maceta pintada con suculenta, 60 canasta dulce de Navidad, 23 kit de café en frasco, 30 alfajores, 37 cocadas, 34 galletas de avena y chocolate.
 - `assets-ia/*` — generadas por IA (la aclaración está en /aviso-legal).
-- `assets/muestras/*` — páginas reales del material. `assets/img/mockup-*.webp` — montados con las portadas reales.
+- `assets/muestras-v2/*` — páginas reales del material (recortadas al contenido, 4:5). `assets/img/mockup-*.webp` — montados con las portadas reales.
 
 ## Deploy en Vercel (paso a paso)
 
