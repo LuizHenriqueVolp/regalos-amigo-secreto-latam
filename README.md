@@ -34,7 +34,7 @@ sql/schema.sql        tablas visits, clicks, leads
 | Order bump: Dinámicas de Amigo Secreto | US$ 5 (dentro del checkout) | https://pay.cakto.com.br/rvfj6tj_1313965 |
 | Upsell en /gracias: Kit de Canastas para Vender | de US$ 15 por **US$ 14** | https://pay.cakto.com.br/vuusuyd_1313973 |
 
-Garantía: 7 días. Contacto: WhatsApp +55 (45) 99818-2802.
+Garantía: 7 días. Contacto: WhatsApp (link `wa.me` en el footer, garantía y FAQ).
 
 ## Pendientes
 

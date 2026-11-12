@@ -146,15 +146,21 @@
         sticky.setAttribute("aria-hidden", show ? "false" : "true");
         var link = sticky.querySelector("a"); if (link) link.tabIndex = show ? 0 : -1;
       };
-      new IntersectionObserver(function (en) {
-        priceVisible = en[0].isIntersecting;
-        if (priceVisible && !seen) {
+      // ViewContent: cuando el valor (US$ 7) aparece en pantalla
+      var amount = price.querySelector(".amount") || price;
+      var checkPrice = function () {
+        if (seen) return;
+        var r = amount.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight - r.height * 0.4) {
           seen = true;
+          window.removeEventListener("scroll", checkPrice);
           fbq("track", "ViewContent", { content_name: "+60 Regalos Caseros", value: 7, currency: "USD" });
           send({ type: "click", visit_id: visitId(), cta: "view_price", utm_campaign: params.utm_campaign, src: params.src }, true);
         }
-        update();
-      }, { threshold: 0.35 }).observe(price);
+      };
+      window.addEventListener("scroll", checkPrice, { passive: true });
+      checkPrice();
+      new IntersectionObserver(function (en) { priceVisible = en[0].isIntersecting; update(); }, { threshold: 0.15 }).observe(price);
       if (hero) new IntersectionObserver(function (en) { heroVisible = en[0].isIntersecting; update(); }).observe(hero);
     }
   }
