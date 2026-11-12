@@ -163,7 +163,7 @@ figure { margin: 0; }
 
 .bono-price { margin-top: 8px !important; font-family: var(--font-title); font-size: 16px; }
 .bono-price s, .bonos-total s, .li-price s { color: var(--cacao-suave); text-decoration-color: var(--rojo); text-decoration-thickness: 2px; font-weight: 700; }
-.bono-price b { color: var(--verde); font-weight: 900; margin-left: 6px; text-transform: uppercase; }
+.bono-price b { color: var(--verde); font-weight: 900; text-transform: uppercase; }
 .bonos-total { margin: 18px 0 0; text-align: center; background: #fff; border: 2px dashed var(--verde); border-radius: 14px; padding: 12px; font-family: var(--font-title); font-weight: 700; font-size: 16px; }
 .bonos-total b { display: block; color: var(--verde); font-weight: 900; font-size: 1.15rem; text-transform: uppercase; }
 .li-price { white-space: nowrap; font-size: 16px; }

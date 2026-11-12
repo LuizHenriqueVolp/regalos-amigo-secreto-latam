@@ -32,7 +32,7 @@ sql/schema.sql        tablas visits, clicks, leads
 
 | Producto | Precio | Checkout Cakto |
 |---|---|---|
-| +60 Regalos Caseros (+ Empieza aquí, Etiquetas, Guía de canastas) + 5 bonos (Planificador de Diciembre, Organizador de Regalos, 50 Mensajes, Papeles de Regalo, Moldes de Cajitas — US$ 5 c/u tachado, "Incluido") | de US$ 9 por **US$ 7** | https://pay.cakto.com.br/372iq4v_1313944 |
+| +60 Regalos Caseros (+ Empieza aquí, Etiquetas, Guía de canastas) + 5 bonos (Planificador de Diciembre, Organizador de Regalos, 50 Mensajes, Papeles de Regalo, Moldes de Cajitas — marcados como "Incluido") | de US$ 9 por **US$ 7** | https://pay.cakto.com.br/372iq4v_1313944 |
 | Order bump: Dinámicas de Amigo Secreto | US$ 5 (dentro del checkout) | https://pay.cakto.com.br/rvfj6tj_1313965 |
 | Upsell en /gracias: Kit de Canastas para Vender | de US$ 15 por **US$ 14** | https://pay.cakto.com.br/vuusuyd_1313973 |
 
