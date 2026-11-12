@@ -22,7 +22,7 @@ assets/app.js         tracking (Meta Pixel + Neon), carrusel, animaciones, stick
 assets/img/           logo, portadas y mockups del producto y bonos
 assets/regalos/       fotos de ejemplos (Unsplash) para la franja que pasa sin parar
 assets/muestras/      páginas REALES del material (carrusel "Mira por dentro")
-assets-ia/            imágenes generadas por IA (siempre con "Imagen ilustrativa")
+assets-ia/            imágenes generadas por IA (uso ilustrativo, sin leyenda)
 assets/video/         video ilustrativo comprimido + póster
 api/event.js          función serverless → Neon
 sql/schema.sql        tablas visits, clicks, leads
@@ -48,7 +48,7 @@ Busca pendientes con: `grep -rn "PREENCHER" --include=*.html --include=*.js .`
 ## Créditos de imágenes
 
 - `assets/regalos/*` — fotos de [Unsplash](https://unsplash.com/license) (licencia gratuita, uso comercial permitido). IDs: 1614961752345-831dff127f96, 1600857544200-b2f666a9a2ec, 1642511842792-993e9b8cd0f8, 1665473052568-e36bc84cca4c, 1550623685-2227f7bbef18, 1702648906616-b030f193edb9, 1668723968333-28fff638eecd, 1757450317518-9d385619f5ee, 1690583368332-c1931e70e53e, 1485955900006-10f4d324d411, 1668432321756-5109ad1f5916.
-- `assets-ia/*` — generadas por IA, siempre con "Imagen ilustrativa".
+- `assets-ia/*` — generadas por IA (la aclaración está en /aviso-legal).
 - `assets/muestras/*` — páginas reales del material. `assets/img/mockup-*.webp` — montados con las portadas reales.
 
 ## Deploy en Vercel (paso a paso)
@@ -102,6 +102,6 @@ Todo está en `:root` al inicio de `assets/styles.css` (`--vino`, `--dorado`, `-
 ## Reglas de contenido (checklist)
 
 - Números iguales en todas las secciones: +60 ideas (20/20/20), 12 canastas, US$ 7 / US$ 5 / US$ 14.
-- Imágenes de IA solo como ilustrativas y con la leyenda "Imagen ilustrativa"; nunca en el carrusel de muestras.
+- Imágenes de IA solo como ilustrativas (aclarado en /aviso-legal); nunca en el carrusel de muestras.
 - Sin testimonios, cronómetros, cupos ni números inventados. Sin mención a alcohol.
 - Ninguna credencial en el repositorio (`.env` está en `.gitignore`).
