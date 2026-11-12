@@ -9,7 +9,7 @@ Página de ventas mobile-first (LATAM, español neutro) para el infoproducto dig
 - `/aviso-legal`, `/privacidad` → páginas legales
 - `/api/event` → función serverless que guarda visitas, clics y leads en Neon (Postgres)
 
-Stack: HTML + CSS + JS puro (sin build), imágenes WebP con lazy load, video MP4 cargado solo al tocar play. Deploy en Vercel vía GitHub.
+Stack: HTML + CSS + JS puro con un build mínimo (`scripts/build.mjs`: embute CSS/config en el HTML y genera `dist/`), imágenes WebP con lazy load, video MP4 cargado solo al tocar play. Deploy en Vercel vía GitHub.
 
 ## Estructura
 
@@ -105,3 +105,11 @@ Todo está en `:root` al inicio de `assets/styles.css` (`--vino`, `--dorado`, `-
 - Imágenes de IA solo como ilustrativas (aclarado en /aviso-legal); nunca en el carrusel de muestras.
 - Sin testimonios, cronómetros, cupos ni números inventados. Sin mención a alcohol.
 - Ninguna credencial en el repositorio (`.env` está en `.gitignore`).
+
+## Rendimiento (mobile)
+
+Lighthouse mobile: Performance 94–98, LCP ~1,9 s, CLS 0.
+- Fuentes alojadas en `assets/fonts/` (Montserrat y Nunito variables, latin) con fallback calibrado.
+- CSS embutido en cada HTML durante el build; `app.js` versionado (`?v=hash`).
+- Meta Pixel: PageView queda en cola y el script se carga 2,5 s después del `load` o en el primer toque; los CTAs esperan a que cargue antes de ir al checkout.
+- Imágenes en `assets/` y `assets-ia/` con caché de 1 año (`immutable`): **si cambias una imagen, usa un nombre de archivo nuevo**.

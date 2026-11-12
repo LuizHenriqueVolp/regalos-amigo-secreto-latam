@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Página de ventas Lazo y Mano — +60 Regalos Caseros para Amigo Secreto",
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "vercel dev",
+    "build": "node scripts/build.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4"

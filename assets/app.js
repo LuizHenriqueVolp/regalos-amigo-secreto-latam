@@ -80,10 +80,17 @@
           ev.preventDefault();
           return;
         }
-        // da tiempo mínimo al pixel antes de salir
+        // Asegura que el Pixel registre el clic antes de salir al checkout
         ev.preventDefault();
         var href = withParams(CFG[urlKey]);
-        setTimeout(function () { location.href = href; }, 180);
+        var go = function () { location.href = href; };
+        if (window.LYM_loadPixel) window.LYM_loadPixel();
+        if (window.fbq && window.fbq.callMethod) { setTimeout(go, 180); return; }
+        var t0 = Date.now();
+        (function wait() {
+          if ((window.fbq && window.fbq.callMethod) || Date.now() - t0 > 900) setTimeout(go, 150);
+          else setTimeout(wait, 50);
+        })();
       });
     });
   }
@@ -251,6 +258,13 @@
         t.appendChild(c);
       });
     });
+    // Pausa las franjas cuando no están en pantalla (ahorra batería y CPU)
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { e.target.classList.toggle("off", !e.isIntersecting); });
+      }, { rootMargin: "100px 0px" });
+      document.querySelectorAll(".marquee").forEach(function (m) { io.observe(m); });
+    }
   }
 
   /* ---------- Init ---------- */

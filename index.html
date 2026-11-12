@@ -13,17 +13,21 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito:wght@400;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/styles.css">
-<link rel="preload" as="image" href="/assets/video/poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/video/poster-360.webp" imagesrcset="/assets/video/poster-360.webp 360w, /assets/video/poster.webp 540w" imagesizes="330px" fetchpriority="high">
 <script>document.documentElement.classList.remove('no-js')</script>
 <script src="/assets/config.js"></script>
 
 <!-- Meta Pixel -->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+/* Meta Pixel: la cola (fbq) existe desde el inicio; el script pesado se carga
+   después de que la página termina de cargar, para no frenar el celular. */
+!function(f,b,e,v){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+var done=0;f.LYM_loadPixel=function(){if(done)return;done=1;var t=b.createElement(e);t.async=!0;t.src=v;var s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)};
+f.addEventListener('load',function(){setTimeout(function(){f.requestIdleCallback?f.requestIdleCallback(f.LYM_loadPixel,{timeout:1500}):f.LYM_loadPixel()},2500)});['pointerdown','keydown'].forEach(function(x){f.addEventListener(x,function(){f.LYM_loadPixel()},{once:true,passive:true})});
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', (window.LYM_CONFIG||{}).META_PIXEL_ID || '1882099482975493');
 fbq('track', 'PageView');
 </script>
@@ -53,7 +57,7 @@ fbq('track', 'PageView');
     <div class="video-box">
       <div class="label">▶ Mira el video y descubre cómo empezar</div>
       <div class="video-frame" id="video-frame">
-        <img src="/assets/video/poster.webp" width="540" height="960" alt="Canasta de regalo para el amigo secreto con lazo dorado" fetchpriority="high">
+        <img src="/assets/video/poster-360.webp" srcset="/assets/video/poster-360.webp 360w, /assets/video/poster.webp 540w" sizes="330px" width="540" height="960" decoding="async" alt="Canasta de regalo para el amigo secreto con lazo dorado" fetchpriority="high">
         <button class="play" type="button" aria-label="Reproducir video" data-src="/assets/video/canasta.mp4">
           <span><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
         </button>
@@ -68,17 +72,17 @@ fbq('track', 'PageView');
     <h2 class="center reveal">Mira algunos regalos caseros que vas a aprender a hacer:</h2>
     <div class="marquee" style="--dur:45s" aria-label="Ejemplos de regalos caseros">
       <div class="marquee-track">
-        <figure class="mq-card"><img src="/assets/regalos/01-vela.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Vela de soya en frasco</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/02-jabones.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Jabones artesanales</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/03-galletas.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Galletas decoradas</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/04-mermelada.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Mermelada casera</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/05-sales.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Sales de baño aromáticas</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/06-chocolate.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Chocolate caliente en frasco</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/07-granola.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Granola casera</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/08-trufas.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Trufas caseras</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/09-bombas.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Bombas de baño</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/10-suculenta.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Maceta con suculenta</b></figure>
-        <figure class="mq-card"><img src="/assets/regalos/11-canasta.webp" width="400" height="520" loading="lazy" decoding="async" alt=""><b>Canasta de Navidad</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/01-vela.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Vela de soya en frasco</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/02-jabones.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Jabones artesanales</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/03-galletas.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Galletas decoradas</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/04-mermelada.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Mermelada casera</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/05-sales.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Sales de baño aromáticas</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/06-chocolate.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Chocolate caliente en frasco</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/07-granola.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Granola casera</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/08-trufas.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Trufas caseras</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/09-bombas.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Bombas de baño</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/10-suculenta.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Maceta con suculenta</b></figure>
+        <figure class="mq-card"><img src="/assets/regalos/11-canasta.webp" width="304" height="400" loading="lazy" decoding="async" alt=""><b>Canasta de Navidad</b></figure>
       </div>
     </div>
     <p class="ia-cap">Fotos de referencia</p>
@@ -96,10 +100,10 @@ fbq('track', 'PageView');
     <p>Para ti si tienes un amigo secreto, un intercambio de oficina o una cena de fin de año y quieres un regalo con tu toque personal, sin gastar de más ni salir corriendo a la tienda.</p>
     <div class="grid-2">
       <figure>
-        <div class="ilus"><img src="/assets-ia/cesta-cafe-blanca-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Canasta con café, frasco y taza blanca"></div>
+        <div class="ilus"><img src="/assets-ia/cesta-cafe-blanca-360.webp" srcset="/assets-ia/cesta-cafe-blanca-360.webp 360w, /assets-ia/cesta-cafe-blanca-480.webp 480w" sizes="45vw" width="480" height="480" loading="lazy" decoding="async" alt="Canasta con café, frasco y taza blanca"></div>
       </figure>
       <figure>
-        <div class="ilus"><img src="/assets-ia/cesta-kraft-480.webp" width="480" height="480" loading="lazy" decoding="async" alt="Caja kraft con bolsitas de café y taza"></div>
+        <div class="ilus"><img src="/assets-ia/cesta-kraft-360.webp" srcset="/assets-ia/cesta-kraft-360.webp 360w, /assets-ia/cesta-kraft-480.webp 480w" sizes="45vw" width="480" height="480" loading="lazy" decoding="async" alt="Caja kraft con bolsitas de café y taza"></div>
       </figure>
     </div>
   </div>
@@ -148,7 +152,7 @@ fbq('track', 'PageView');
   <div class="wrap">
     <div class="reveal center">
       <h2>🎁 Y además te llevas <span class="hl-red">3 bonos</span> incluidos</h2>
-      <img class="mockup-wide" src="/assets/img/mockup-bonos.webp" width="700" height="474" loading="lazy" decoding="async" alt="Bonos: Empieza aquí, Etiquetas imprimibles y Guía de canastas">
+      <img class="mockup-wide" src="/assets/img/mockup-bonos-400.webp" srcset="/assets/img/mockup-bonos-400.webp 400w, /assets/img/mockup-bonos.webp 700w" sizes="(max-width: 520px) 90vw, 460px" width="700" height="474" loading="lazy" decoding="async" alt="Bonos: Empieza aquí, Etiquetas imprimibles y Guía de canastas">
     </div>
     <div class="stack">
       <article class="prod reveal">
@@ -196,12 +200,12 @@ fbq('track', 'PageView');
     <div class="marquee reverse" style="--dur:38s" aria-label="Páginas del material">
       <div class="marquee-track">
         <!-- [PREENCHER] agregar fotos reales de canastas armadas por compradores cuando existan -->
-        <figure class="mq-page"><img src="/assets/muestras/01-indice.webp" width="640" height="1279" loading="lazy" decoding="async" alt="Índice con las 60 fichas"><p>Índice de las 60 fichas</p></figure>
-        <figure class="mq-page"><img src="/assets/muestras/02-empieza-aqui.webp" width="640" height="1279" loading="lazy" decoding="async" alt="Guía Empieza aquí"><p>Guía "Empieza aquí"</p></figure>
-        <figure class="mq-page"><img src="/assets/muestras/03-ficha-vela.webp" width="640" height="1279" loading="lazy" decoding="async" alt="Ficha 01: vela de soya con costo y paso a paso"><p>Ficha con costo por ítem</p></figure>
-        <figure class="mq-page"><img src="/assets/muestras/04-ficha-kit-cafe.webp" width="640" height="1279" loading="lazy" decoding="async" alt="Ficha 23: kit de café en frasco"><p>Paso a paso ilustrado</p></figure>
-        <figure class="mq-page"><img src="/assets/muestras/05-tabla-canastas.webp" width="640" height="1279" loading="lazy" decoding="async" alt="Tabla de costo y precio de las 12 canastas"><p>Tabla costo × precio</p></figure>
-        <figure class="mq-page"><img src="/assets/muestras/06-etiquetas.webp" width="640" height="640" loading="lazy" decoding="async" alt="Hoja de etiquetas imprimibles" style="object-fit:contain;background:#FDF7EE"><p>Etiquetas para imprimir</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/01-indice.webp" width="340" height="680" loading="lazy" decoding="async" alt="Índice con las 60 fichas"><p>Índice de las 60 fichas</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/02-empieza-aqui.webp" width="340" height="680" loading="lazy" decoding="async" alt="Guía Empieza aquí"><p>Guía "Empieza aquí"</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/03-ficha-vela.webp" width="340" height="680" loading="lazy" decoding="async" alt="Ficha 01: vela de soya con costo y paso a paso"><p>Ficha con costo por ítem</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/04-ficha-kit-cafe.webp" width="340" height="680" loading="lazy" decoding="async" alt="Ficha 23: kit de café en frasco"><p>Paso a paso ilustrado</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/05-tabla-canastas.webp" width="340" height="680" loading="lazy" decoding="async" alt="Tabla de costo y precio de las 12 canastas"><p>Tabla costo × precio</p></figure>
+        <figure class="mq-page"><img src="/assets/muestras/06-etiquetas.webp" width="340" height="340" loading="lazy" decoding="async" alt="Hoja de etiquetas imprimibles" style="object-fit:contain;background:#FDF7EE"><p>Etiquetas para imprimir</p></figure>
       </div>
     </div>
   </div>
@@ -240,7 +244,7 @@ fbq('track', 'PageView');
   <div class="wrap reveal">
     <div class="price-card" id="price-card">
       <span class="ribbon">OFERTA DE NAVIDAD</span>
-      <img class="mockup" src="/assets/img/mockup-producto.webp" width="760" height="538" loading="lazy" decoding="async" alt="+60 Regalos Caseros con sus 3 bonos">
+      <img class="mockup" src="/assets/img/mockup-producto-400.webp" srcset="/assets/img/mockup-producto-400.webp 400w, /assets/img/mockup-producto.webp 760w" sizes="(max-width: 520px) 80vw, 380px" width="760" height="538" loading="lazy" decoding="async" alt="+60 Regalos Caseros con sus 3 bonos">
       <h2>+60 Regalos Caseros para Amigo Secreto</h2>
       <ul class="checks">
         <li>+60 ideas de regalos caseros (20 de US$ 3, 20 de US$ 5 y 20 de US$ 10)</li>
