@@ -36,7 +36,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0; font-family: var(--font-body); font-size: 17px; line-height: 1.6;
   color: var(--cacao); background: var(--fondo); overflow-x: hidden; padding-bottom: var(--sticky-h);
@@ -47,7 +47,7 @@ h2 { font-size: clamp(1.3rem, 5.6vw, 1.6rem); font-weight: 800; color: var(--cac
 h3 { font-size: 1.1rem; font-weight: 800; color: var(--cacao); }
 p { margin: 0 0 1em; }
 a { color: var(--vino); }
-.page { max-width: var(--max); margin: 0 auto; background: var(--fondo); }
+.page { max-width: var(--max); margin: 0 auto; background: var(--fondo); overflow-x: clip; }
 @media (min-width: 600px) {
   body { background: #FBFAF8; }
   .page { border-left: 1px solid var(--borde); border-right: 1px solid var(--borde); box-shadow: 0 0 40px -20px rgba(0,0,0,.15); }
@@ -160,6 +160,15 @@ figure { margin: 0; }
 .prod .free { color: var(--verde); font-weight: 800; }
 .stack { display: grid; gap: 14px; }
 .mockup-wide { margin: 6px auto 18px; width: 100%; max-width: min(100%, 460px); height: auto; }
+
+.bono-price { margin-top: 8px !important; font-family: var(--font-title); font-size: 16px; }
+.bono-price s, .bonos-total s, .li-price s { color: var(--cacao-suave); text-decoration-color: var(--rojo); text-decoration-thickness: 2px; font-weight: 700; }
+.bono-price b { color: var(--verde); font-weight: 900; margin-left: 6px; text-transform: uppercase; }
+.bonos-total { margin: 18px 0 0; text-align: center; background: #fff; border: 2px dashed var(--verde); border-radius: 14px; padding: 12px; font-family: var(--font-title); font-weight: 700; font-size: 16px; }
+.bonos-total b { display: block; color: var(--verde); font-weight: 900; font-size: 1.15rem; text-transform: uppercase; }
+.li-price { white-space: nowrap; font-size: 16px; }
+.li-price s { margin-right: 4px; }
+.li-price { color: var(--verde); font-weight: 800; }
 
 /* ---------- Dos usos ---------- */
 .uses { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }

@@ -273,7 +273,21 @@
   if (PAGE === "gracias") {
     bindCtas(".js-upsell", "UPSELL_URL", { value: 14, currency: "USD", content_name: "upsell_kit_canastas" });
   } else {
-    bindCtas(".js-cta", "CHECKOUT_URL", { value: 7, currency: "USD" });
+    // Solo el botón dentro de la Oferta de Navidad va al checkout
+    bindCtas("#price-card .js-cta", "CHECKOUT_URL", { value: 7, currency: "USD" });
+    // Los demás botones llevan (con scroll suave) hasta la Oferta de Navidad
+    document.querySelectorAll(".js-cta").forEach(function (a) {
+      if (a.closest("#price-card")) return;
+      a.setAttribute("href", "#precio");
+      a.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        window.LYM_logClick(a.getAttribute("data-cta") || "cta");
+        var card = document.getElementById("price-card");
+        if (!card) { location.hash = "precio"; return; }
+        var y = card.getBoundingClientRect().top + window.pageYOffset - 24;
+        window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
+      });
+    });
   }
   setupReveal();
   setupPriceAndSticky();

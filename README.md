@@ -20,7 +20,7 @@ assets/config.js      ← LINKS DE CHECKOUT, UPSELL Y PIXEL (editar aquí)
 assets/styles.css     estilos; colores y fuentes en variables CSS al inicio (:root)
 assets/app.js         tracking (Meta Pixel + Neon), carrusel, animaciones, sticky CTA
 assets/img/           logo, portadas y mockups del producto y bonos
-assets/regalos/       fotos de ejemplos (Unsplash) para la franja que pasa sin parar
+assets/regalos-v2/    fotos de ejemplos (Unsplash) para la franja que pasa sin parar
 assets/muestras/      páginas REALES del material (carrusel "Mira por dentro")
 assets-ia/            imágenes generadas por IA (uso ilustrativo, sin leyenda)
 assets/video/         video ilustrativo comprimido + póster
@@ -32,7 +32,7 @@ sql/schema.sql        tablas visits, clicks, leads
 
 | Producto | Precio | Checkout Cakto |
 |---|---|---|
-| +60 Regalos Caseros + 3 bonos (Empieza aquí, Etiquetas, Guía de canastas) | de US$ 9 por **US$ 7** | https://pay.cakto.com.br/372iq4v_1313944 |
+| +60 Regalos Caseros (+ Empieza aquí, Etiquetas, Guía de canastas) + 5 bonos (Planificador de Diciembre, Organizador de Regalos, 50 Mensajes, Papeles de Regalo, Moldes de Cajitas — US$ 5 c/u tachado, "Incluido") | de US$ 9 por **US$ 7** | https://pay.cakto.com.br/372iq4v_1313944 |
 | Order bump: Dinámicas de Amigo Secreto | US$ 5 (dentro del checkout) | https://pay.cakto.com.br/rvfj6tj_1313965 |
 | Upsell en /gracias: Kit de Canastas para Vender | de US$ 15 por **US$ 14** | https://pay.cakto.com.br/vuusuyd_1313973 |
 
@@ -47,7 +47,7 @@ Busca pendientes con: `grep -rn "PREENCHER" --include=*.html --include=*.js .`
 
 ## Créditos de imágenes
 
-- `assets/regalos/*` — fotos de [Unsplash](https://unsplash.com/license) (licencia gratuita, uso comercial permitido). IDs: 1614961752345-831dff127f96, 1600857544200-b2f666a9a2ec, 1642511842792-993e9b8cd0f8, 1665473052568-e36bc84cca4c, 1550623685-2227f7bbef18, 1702648906616-b030f193edb9, 1668723968333-28fff638eecd, 1757450317518-9d385619f5ee, 1690583368332-c1931e70e53e, 1485955900006-10f4d324d411, 1668432321756-5109ad1f5916.
+- `assets/regalos-v2/*` — fotos de [Unsplash](https://unsplash.com/license) (licencia gratuita, uso comercial). Cada foto corresponde a una ficha real del ebook: 01 vela de soya, 25 jabones de avena y miel, 46 galletas con glasé, 21 mermelada de frutilla, 04 sales de baño, 06 chocolate caliente en frasco, 10 granola, 12 trufas de galleta, 22 bombas de baño, 15 maceta pintada con suculenta, 60 canasta dulce de Navidad, 23 kit de café en frasco, 30 alfajores, 37 cocadas, 34 galletas de avena y chocolate.
 - `assets-ia/*` — generadas por IA (la aclaración está en /aviso-legal).
 - `assets/muestras/*` — páginas reales del material. `assets/img/mockup-*.webp` — montados con las portadas reales.
 
@@ -111,5 +111,6 @@ Todo está en `:root` al inicio de `assets/styles.css` (`--vino`, `--dorado`, `-
 Lighthouse mobile: Performance 94–98, LCP ~1,9 s, CLS 0.
 - Fuentes alojadas en `assets/fonts/` (Montserrat y Nunito variables, latin) con fallback calibrado.
 - CSS embutido en cada HTML durante el build; `app.js` versionado (`?v=hash`).
+- CTAs: todos llevan (scroll suave) a la Oferta de Navidad; solo el botón dentro de la oferta abre el checkout.
 - Meta Pixel: PageView queda en cola y el script se carga 2,5 s después del `load` o en el primer toque; los CTAs esperan a que cargue antes de ir al checkout.
 - Imágenes en `assets/` y `assets-ia/` con caché de 1 año (`immutable`): **si cambias una imagen, usa un nombre de archivo nuevo**.
